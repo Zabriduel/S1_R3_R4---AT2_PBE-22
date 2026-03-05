@@ -5,5 +5,6 @@ const alunoController = new AlunoController();
 const alunoRoutes = Router();
 
 alunoRoutes.get('/alunos',alunoController.selecionar);
+alunoRoutes.post('/alunos',alunoController.criar);
 
 export default alunoRoutes;
