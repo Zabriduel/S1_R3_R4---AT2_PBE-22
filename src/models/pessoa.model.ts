@@ -10,7 +10,9 @@ export abstract class Pessoa implements IPessoa {
         this.Nome = nome;
         this.Email = email;
     }
-    public abstract mostrarDados(): string;
+    mostrarDados(): string {
+        return `Nome ${this._nome} e  Email ${this._email} `;
+    };
 
     public get Nome(): string {
         return this._nome;

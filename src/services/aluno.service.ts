@@ -12,4 +12,11 @@ export class AlunoService {
 
         return await this._repository.create(aluno);
     }
+    async editar(idAluno: number, nomeAluno: string, email: string, matricula: string, curso: string, mediaFinal: number) {
+        const aluno = Aluno.editar(nomeAluno, email, matricula, curso, mediaFinal);
+        return await this._repository.update(idAluno, aluno);
+    }
+    async deletar(idAluno: number) {
+        return await this._repository.delete(idAluno);
+    }
 }

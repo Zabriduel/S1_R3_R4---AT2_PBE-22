@@ -1,3 +1,4 @@
+import { cursorTo } from "node:readline";
 import { Pessoa } from "./pessoa.model";
 
 export class Aluno extends Pessoa {
@@ -23,10 +24,13 @@ export class Aluno extends Pessoa {
     }
 
     public mostrarDados(): string {
-        return 'oi';
+        return `${super.mostrarDados()} Matricula: ${this._matricula} Curso: ${this._curso} Media Final: ${this.MediaFinal}`;
     }
 
    public static criar(nomeAluno:string, email:string,matricula:string, curso:string, mediaFinal:number):Aluno{
+        return new Aluno(nomeAluno,email,matricula,curso,mediaFinal);
+    }
+   public static editar (nomeAluno:string, email:string,matricula:string, curso:string, mediaFinal:number):Aluno{
         return new Aluno(nomeAluno,email,matricula,curso,mediaFinal);
     }
 }
