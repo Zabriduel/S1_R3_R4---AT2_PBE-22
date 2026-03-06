@@ -6,7 +6,7 @@ const alunoRoutes = Router();
 
 alunoRoutes.get('/alunos',alunoController.selecionar);
 alunoRoutes.post('/alunos',alunoController.criar);
-alunoRoutes.patch('/produtos', alunoController.editar);
-alunoRoutes.delete('/produtos', alunoController.deletar);
+alunoRoutes.patch('/alunos', alunoController.editar);
+alunoRoutes.delete('/alunos', alunoController.deletar);
 
 export default alunoRoutes;
