@@ -1,4 +1,4 @@
-import { Aluno } from "../models/aluno.model";
+import { Professor } from "../models/professor.model";
 import { AlunoRepository } from "../repository/aluno.repository";
 
 export class AlunoService {
