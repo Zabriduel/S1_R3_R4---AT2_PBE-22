@@ -8,6 +8,13 @@ export class AlunoRepository {
         const [rows] = await db.execute<RowDataPacket[]>('SELECT * FROM alunos;');
         return rows;
     }
+    async findById(id: number): Promise<RowDataPacket[]> {
+        const sql = 'SELECT * FROM alunos WHERE id = ?;';
+        const values = [id];
+        const [rows] = await db.execute<RowDataPacket[]>(sql, values);
+        return rows;
+
+    }
 
     async create(dados: Aluno): Promise<ResultSetHeader> {
         const sql = 'INSERT INTO alunos (nomeAluno, email,matricula, curso, mediaFinal) VALUES (?,?,?,?,?);';

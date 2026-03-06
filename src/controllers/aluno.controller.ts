@@ -1,4 +1,3 @@
-import { noDeprecation } from "node:process";
 import { AlunoService } from "../services/aluno.service";
 import { Request, Response } from "express";
 
@@ -7,11 +6,26 @@ export class AlunoController {
 
     selecionar = async (req: Request, res: Response) => {
         try {
-            const alunos = await this._service.SelecionarTodos();
-            if (alunos.length === 0) {
-                res.status(200).json({ message: "Nenhum aluno encontrado", alunos });
+            const id = Number(req.query.id);
+            if (id || isNaN(id)) {
+                if (!id || isNaN(id)) {
+                    throw new Error('Valor para id deve ser um número válido.');
+                }
+                const aluno = await this._service.selecionarPorId(id);
+                if (aluno.length === 0) {
+                    return res.status(200).json({ message: "Nenhum aluno encontrado", aluno });
+                }
+                return res.status(200).json({ aluno });
+            } else {
+                const alunos = await this._service.SelecionarTodos();
+                if (alunos.length === 0) {
+                    res.status(200).json({ message: "Nenhum aluno encontrado", alunos });
+                }
+                return res.status(200).json({ alunos });
             }
-            return res.status(200).json({ alunos });
+
+
+
         } catch (error: unknown) {
             console.error(error);
             if (error instanceof Error) {
@@ -44,7 +58,7 @@ export class AlunoController {
             if (!idAluno || isNaN(idAluno)) {
                 throw new Error('Valor para ID aluno é inválido');
             }
-            const alterado = await this._service.editar(idAluno, nomeAluno, email, matricula, curso, mediaFinal);
+            const alterado = await this._service.editar(idAluno, nomeAluno, email, matricula, curso, mediaFinal,);
 
             return res.status(200).json({ message: "Registro alterado com sucesso!", alterado });
         } catch (error: unknown) {

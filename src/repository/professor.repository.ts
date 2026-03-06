@@ -8,18 +8,25 @@ export class ProfessorRepository {
         const [rows] = await db.execute<RowDataPacket[]>('SELECT * FROM professores;');
         return rows;
     }
+    async findById(id: number): Promise<RowDataPacket[]> {
+        const sql = 'SELECT * FROM professores WHERE id = ?;';
+        const values = [id];
+        const [rows] = await db.execute<RowDataPacket[]>(sql, values);
+        return rows;
+
+    }
 
     async create(dados: Professor): Promise<ResultSetHeader> {
         const sql = 'INSERT INTO professores (nomeProfessor,email, disciplina,cargaHoraria) VALUES (?,?,?,?);';
         const values = [dados.Nome, dados.Email, dados.Disciplina, dados.CargaHorario];
-        console.log(values);
+
 
         const [rows] = await db.execute<ResultSetHeader>(sql, values);
         return rows
     }
-    async update(id: number, dados: Aluno): Promise<ResultSetHeader> {
-        const sql = ' UPDATE alunos SET nomeAluno = ?, email = ?, matricula = ?, curso = ?, mediaFinal = ? WHERE idAluno = ?;';
-        const values = [dados.Nome, dados.Email, dados.Matricula, dados.Curso, dados.MediaFinal, id];
+    async update(id: number, dados: Professor): Promise<ResultSetHeader> {
+        const sql = ' UPDATE professores SET nomeProfessor = ?, email = ?, disciplina = ?, cargaHoraria = ? WHERE idProfessor = ?;';
+        const values = [dados.Nome, dados.Email, dados.Disciplina, dados.CargaHorario];
 
         const [rows] = await db.execute<ResultSetHeader>(sql, values);
         console.log(rows);
@@ -27,7 +34,7 @@ export class ProfessorRepository {
         return rows
     }
     async delete(id: number): Promise<ResultSetHeader> {
-        const sql = 'DELETE FROM alunos WHERE idAluno = 1';
+        const sql = ' DELETE FROM professores WHERE idProfessor = ?;';
         const values = [id];
         const [rows] = await db.execute<ResultSetHeader>(sql, values);
         return rows;

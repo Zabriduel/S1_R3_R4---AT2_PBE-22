@@ -5,7 +5,11 @@ export class AlunoService {
     constructor(private _repository = new AlunoRepository()) { }
 
     async SelecionarTodos() {
+        
         return await this._repository.findAll();
+    }
+    async selecionarPorId(id:number){
+        return await this._repository.findById(id);
     }
     async criar(nomeAluno: string, email: string, matricula: string, curso: string, mediaFinal: number) {
         const aluno = Aluno.criar(nomeAluno, email, matricula, curso, mediaFinal);
@@ -13,7 +17,7 @@ export class AlunoService {
         return await this._repository.create(aluno);
     }
     async editar(idAluno: number, nomeAluno: string, email: string, matricula: string, curso: string, mediaFinal: number) {
-        const aluno = Aluno.editar(nomeAluno, email, matricula, curso, mediaFinal);
+        const aluno = Aluno.editar(idAluno,nomeAluno, email, matricula, curso, mediaFinal);
         return await this._repository.update(idAluno, aluno);
     }
     async deletar(idAluno: number) {

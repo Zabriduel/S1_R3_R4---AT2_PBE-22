@@ -1,17 +1,29 @@
-import { noDeprecation } from "node:process";
-import { AlunoService } from "../services/aluno.service";
+import { ProfessorService } from "../services/professor.service";
 import { Request, Response } from "express";
 
-export class AlunoController {
-    constructor(private _service = new AlunoService()) { }
+export class ProfessorController {
+    constructor(private _service = new ProfessorService()) { }
 
     selecionar = async (req: Request, res: Response) => {
         try {
-            const alunos = await this._service.SelecionarTodos();
-            if (alunos.length === 0) {
-                res.status(200).json({ message: "Nenhum aluno encontrado", alunos });
+            const id = Number(req.query.id);
+            if (id || isNaN(id)) {
+                if (!id || isNaN(id)) {
+                    throw new Error('Valor para id deve ser um número válido.');
+                }
+                const professor = await this._service.selecionarPorId(id);
+                if (professor.length === 0) {
+                    return res.status(200).json({ message: "Nenhum aluno encontrado", professor });
+                }
+                return res.status(200).json({ professor });
+            } else {
+
+                const professores = await this._service.SelecionarTodos();
+                if (professores.length === 0) {
+                    res.status(200).json({ message: "Nenhum Professor encontrado", professores });
+                }
+                return res.status(200).json({ professores });
             }
-            return res.status(200).json({ alunos });
         } catch (error: unknown) {
             console.error(error);
             if (error instanceof Error) {
@@ -23,8 +35,8 @@ export class AlunoController {
     }
     criar = async (req: Request, res: Response) => {
         try {
-            const { nomeAluno, email, matricula, curso, mediaFinal } = req.body;
-            const novo = await this._service.criar(nomeAluno, email, matricula, curso, mediaFinal);
+            const { nomeProfessor, email, disciplina, cargaHoraria } = req.body;
+            const novo = await this._service.criar(nomeProfessor, email, disciplina, cargaHoraria);
 
             res.status(201).json({ message: "Registro incluido com sucesso", novo });
 
@@ -39,12 +51,12 @@ export class AlunoController {
     }
     editar = async (req: Request, res: Response) => {
         try {
-            const { nomeAluno, email, matricula, curso, mediaFinal } = req.body;
-            const idAluno = Number(req.query.idAluno);
-            if (!idAluno || isNaN(idAluno)) {
+            const { nomeProfessor, email, disciplina, cargaHoraria } = req.body;
+            const idProfessor = Number(req.query.idProfessor);
+            if (!idProfessor || isNaN(idProfessor)) {
                 throw new Error('Valor para ID aluno é inválido');
             }
-            const alterado = await this._service.editar(idAluno, nomeAluno, email, matricula, curso, mediaFinal);
+            const alterado = await this._service.editar(idProfessor, nomeProfessor, email, disciplina, cargaHoraria);
 
             return res.status(200).json({ message: "Registro alterado com sucesso!", alterado });
         } catch (error: unknown) {
@@ -57,11 +69,11 @@ export class AlunoController {
     }
     deletar = async (req: Request, res: Response) => {
         try {
-            const idAluno = Number(req.query.idAluno);
-            if (!idAluno || isNaN(idAluno)) {
+            const idProfessor = Number(req.query.idProfessor);
+            if (!idProfessor || isNaN(idProfessor)) {
                 throw new Error('Valor para id deve ser um número válido.');
             }
-            const deletado = await this._service.deletar(idAluno);
+            const deletado = await this._service.deletar(idProfessor);
             if (deletado.affectedRows === 0) {
                 return res.status(200).json({ message: "Nenhum registro encontrado para ser deletado" });
             }

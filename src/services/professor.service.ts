@@ -1,20 +1,23 @@
 import { Professor } from "../models/professor.model";
-import { AlunoRepository } from "../repository/aluno.repository";
+import { ProfessorRepository } from "../repository/professor.repository";
 
-export class AlunoService {
-    constructor(private _repository = new AlunoRepository()) { }
+export class ProfessorService {
+    constructor(private _repository = new ProfessorRepository()) { }
 
     async SelecionarTodos() {
         return await this._repository.findAll();
     }
-    async criar(nomeAluno: string, email: string, matricula: string, curso: string, mediaFinal: number) {
-        const aluno = Aluno.criar(nomeAluno, email, matricula, curso, mediaFinal);
+    async selecionarPorId(id: number) {
+        return await this._repository.findById(id);
+    }   
+    async criar(nomeProfessor: string, email: string, disciplina: string, cargaHoraria: number) {
+        const professor = Professor.criar(nomeProfessor, email, disciplina, cargaHoraria);
 
-        return await this._repository.create(aluno);
+        return await this._repository.create(professor);
     }
-    async editar(idAluno: number, nomeAluno: string, email: string, matricula: string, curso: string, mediaFinal: number) {
-        const aluno = Aluno.editar(nomeAluno, email, matricula, curso, mediaFinal);
-        return await this._repository.update(idAluno, aluno);
+    async editar(idProfessor: number, nomeProfessor: string, email: string, disciplina: string, cargaHoraria: number) {
+        const professor = Professor.editar(idProfessor, nomeProfessor, email, disciplina, cargaHoraria);
+        return await this._repository.update(idProfessor, professor);
     }
     async deletar(idAluno: number) {
         return await this._repository.delete(idAluno);
