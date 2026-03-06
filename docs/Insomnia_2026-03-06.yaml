@@ -1,0 +1,308 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: S1_R3_R4 - AT2_PBE 2
+meta:
+  id: wrk_1e69c903932c40eda5b9829304291ffe
+  created: 1772798374294
+  modified: 1772798374294
+  description: ""
+collection:
+  - name: ALUNOS
+    meta:
+      id: fld_672fbc19ca61438ebfc7dae18fca7ebb
+      created: 1772804807814
+      modified: 1772804848011
+      sortKey: -1772804807814
+      description: ""
+    children:
+      - url: http://localhost:8000/alunos
+        name: SELECT ALUNOS
+        meta:
+          id: req_a4d3b7fde5824310babf743d5646439c
+          created: 1772798770008
+          modified: 1772804836094
+          isPrivate: false
+          description: ""
+          sortKey: -1772804812924
+        method: GET
+        parameters:
+          - name: idAluno
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8000/alunos
+        name: INSERT ALUNO
+        meta:
+          id: req_edbe27c79fdc426c9dccf374fb3d23d9
+          created: 1772798808341
+          modified: 1772804817223
+          isPrivate: false
+          description: ""
+          sortKey: -1772804812824
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeAluno":"Gabriel",
+            	"email":"gabriel@email.com", 
+             	"matricula":"DES123", 
+             	"curso":"Usinagem", 
+             	"mediaFinal":10
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8000/alunos
+        name: EDITAR ALUNO
+        meta:
+          id: req_2baf97f661624f2a97f5055b5a6759fd
+          created: 1772804785483
+          modified: 1772804821355
+          isPrivate: false
+          description: ""
+          sortKey: -1772804812724
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeAluno":"Gabriel",
+            	"email":"gabriel@email.com", 
+             	"matricula":"DES123", 
+             	"curso":"Usinagem", 
+             	"mediaFinal":10
+            }
+        parameters:
+          - name: idAluno
+            value: "1"
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8000/alunos
+        name: DELETAR ALUNO
+        meta:
+          id: req_0844ca4f550744a28870797edca60ec9
+          created: 1772804830326
+          modified: 1772804843765
+          isPrivate: false
+          description: ""
+          sortKey: -1772416151572.5
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: ""
+        parameters:
+          - name: idAluno
+            value: "1"
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: PROFESSORES
+    meta:
+      id: fld_140975056fe1467b8a9cf30e66d49c76
+      created: 1772804853950
+      modified: 1772804853950
+      sortKey: -1771850883711.5
+      description: ""
+    children:
+      - url: http://localhost:8000/Professores
+        name: SELECT Professores
+        meta:
+          id: req_8babc21b164e48aaa1c37a6eaaeeab39
+          created: 1772804853952
+          modified: 1772805045445
+          isPrivate: false
+          description: ""
+          sortKey: -1772804812924
+        method: GET
+        parameters:
+          - name: idProfessor
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8000/Professores
+        name: INSERT Professor
+        meta:
+          id: req_b3c3943483d3496897be265e0ee7de43
+          created: 1772804853954
+          modified: 1772805043658
+          isPrivate: false
+          description: ""
+          sortKey: -1772804812824
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeProfessor": "Gabriel",
+            	"email": "gabriel@email.com",
+            	"disciplina": "Back-end",
+            	"cargaHoraria": "100",
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8000/Professores
+        name: EDITAR Professor
+        meta:
+          id: req_47bc4b79afac4b089a97576b53c6d332
+          created: 1772804853955
+          modified: 1772805036369
+          isPrivate: false
+          description: ""
+          sortKey: -1772804812724
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeProfessor": "Gabriel",
+            	"email": "gabriel@email.com",
+            	"disciplina": "Back-end",
+            	"cargaHoraria": "100",
+            }
+        parameters:
+          - name: idProfessor
+            value: "1"
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8000/alunos
+        name: DELETAR ALUNO
+        meta:
+          id: req_aa72c922ffe14f34a3a04358e904b228
+          created: 1772804853957
+          modified: 1772805052759
+          isPrivate: false
+          description: ""
+          sortKey: -1772416151572.5
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: ""
+        parameters:
+          - name: idProfessor
+            value: "1"
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.1
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_951f2a34cb4b4d947fbea7a4900439986d72542e
+    created: 1772798374307
+    modified: 1772798374307
+environments:
+  name: Base Environment
+  meta:
+    id: env_951f2a34cb4b4d947fbea7a4900439986d72542e
+    created: 1772798374301
+    modified: 1772798374301
+    isPrivate: false
