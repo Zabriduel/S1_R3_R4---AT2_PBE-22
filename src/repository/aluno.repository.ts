@@ -4,9 +4,12 @@ import { ResultSetHeader } from "mysql2";
 import { Aluno } from "../models/aluno.model";
 
 export class AlunoRepository {
-    async findAll(): Promise<RowDataPacket[]> {
+    async findAll(): Promise<String[]> {
         const [rows] = await db.execute<RowDataPacket[]>('SELECT * FROM alunos;');
-        return rows;
+        return rows.map(row => {
+            const aluno = new Aluno(row.nome, row.email,row.matricula,row.curso, row.mediaFinal);
+            return aluno.mostrarDados();
+        });
     }
     async findById(id: number): Promise<RowDataPacket[]> {
         const sql = 'SELECT * FROM alunos WHERE id = ?;';
