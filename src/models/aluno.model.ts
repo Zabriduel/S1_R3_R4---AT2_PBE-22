@@ -26,18 +26,21 @@ export class Aluno extends Pessoa {
     public get MediaFinal(): number {
         return this._mediaFinal;
     }
-    
+
     public set Id(value: number) {
         this._id = value;
     }
     public mostrarDados(): string {
         return `${super.mostrarDados()} Matricula: ${this._matricula} Curso: ${this._curso} Media Final: ${this.MediaFinal}`;
     }
+    public estaAprovado(media:number): Boolean {
+        return media > 7 ? true : false;
+    }
 
     public static criar(nomeAluno: string, email: string, matricula: string, curso: string, mediaFinal: number): Aluno {
         return new Aluno(nomeAluno, email, matricula, curso, mediaFinal);
     }
-    public static editar(idAluno:number,nomeAluno: string, email: string, matricula: string, curso: string, mediaFinal: number): Aluno {
-        return new Aluno(nomeAluno, email, matricula, curso, mediaFinal,idAluno);
+    public static editar(idAluno: number, nomeAluno: string, email: string, matricula: string, curso: string, mediaFinal: number): Aluno {
+        return new Aluno(nomeAluno, email, matricula, curso, mediaFinal, idAluno);
     }
 }

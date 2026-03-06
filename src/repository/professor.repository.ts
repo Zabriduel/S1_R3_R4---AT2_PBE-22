@@ -4,9 +4,12 @@ import { ResultSetHeader } from "mysql2";
 import { Professor } from "../models/professor.model";
 
 export class ProfessorRepository {
-    async findAll(): Promise<RowDataPacket[]> {
+    async findAll(): Promise<string[]> {
         const [rows] = await db.execute<RowDataPacket[]>('SELECT * FROM professores;');
-        return rows;
+        return rows.map(row => {
+            const aluno = new Professor(row.nome, row.email, row.matricula, row.curso, row.mediaFinal);
+            return aluno.mostrarDados();
+        });
     }
     async findById(id: number): Promise<RowDataPacket[]> {
         const sql = 'SELECT * FROM professores WHERE id = ?;';

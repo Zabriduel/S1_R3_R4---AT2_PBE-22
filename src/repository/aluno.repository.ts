@@ -7,7 +7,7 @@ export class AlunoRepository {
     async findAll(): Promise<String[]> {
         const [rows] = await db.execute<RowDataPacket[]>('SELECT * FROM alunos;');
         return rows.map(row => {
-            const aluno = new Aluno(row.nome, row.email,row.matricula,row.curso, row.mediaFinal);
+            const aluno = new Aluno(row.nome, row.email, row.matricula, row.curso, row.mediaFinal);
             return aluno.mostrarDados();
         });
     }
@@ -15,7 +15,7 @@ export class AlunoRepository {
         const sql = 'SELECT * FROM alunos WHERE id = ?;';
         const values = [id];
         const [rows] = await db.execute<RowDataPacket[]>(sql, values);
-        return rows;
+        return rows
 
     }
 

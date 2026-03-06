@@ -5,7 +5,6 @@ export class AlunoService {
     constructor(private _repository = new AlunoRepository()) { }
 
     async SelecionarTodos() {
-        
         return await this._repository.findAll();
     }
     async selecionarPorId(id:number){
